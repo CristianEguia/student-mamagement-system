@@ -36,7 +36,11 @@
 
 ### .Net Core Packages
 - `dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer`
+- `dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore`
+- `dotnet add package Microsoft.EntityFrameworkCore.Sqlite`
 - `dotnet add package Microsoft.EntityFrameworkCore.Design`
+
+- `dotnet add package Swashbuckle.AspNetCore`
 
 ## SSH
 

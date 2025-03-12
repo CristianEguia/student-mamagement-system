@@ -6,6 +6,8 @@ namespace API.Controllers
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
+    using API.Data;
+    using API.Models;
 
 
     public class RegisterModel
