@@ -9,6 +9,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'
+import {provideHttpClient} from '@angular/common/http'
 
 
 @NgModule({
@@ -25,7 +26,9 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'
     FontAwesomeModule,
     NgbDropdownModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
