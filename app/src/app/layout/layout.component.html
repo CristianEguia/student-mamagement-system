@@ -1,0 +1,18 @@
+<app-header (_sidebarToggle)="sidebarToggle($event)" />
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+    <app-sidebar />
+  </div>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb4">
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <router-outlet />
+      </div>
+    </main>
+    <app-footer />
+  </div>
+</div>
