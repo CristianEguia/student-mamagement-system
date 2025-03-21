@@ -15,14 +15,15 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  register(user: { email: string, password: string }): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/register`, user);
+  register(user: { username: string, email: string, password: string }): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/auth/register`, user);
   }
 
   login(user: { email: string, password: string }): Observable<any> {
     return this.http.post(`${environment.apiUrl}/login`, user).pipe(
       tap((res: any) => {
         localStorage.setItem('token', res.token);
+        localStorage.setItem('username', res.username); //Para guarda el Username y mostrarlo despues en el sidebar
         this.loggedIn.next(true);
       })
     );

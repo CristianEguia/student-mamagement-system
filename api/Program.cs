@@ -46,6 +46,13 @@ builder.Services.AddAuthorization(
     }
 );
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy => policy.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -66,7 +73,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
+// Configure the HTTP request pipeline.
 if(app.Environment.IsDevelopment()){
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -76,6 +83,7 @@ if(!app.Environment.IsDevelopment()){
     app.UseHttpsRedirection();
 }
 
+app.UseCors("AllowAngular");
 app.UseAuthentication();
 app.UseAuthorization();
 

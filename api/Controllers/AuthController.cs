@@ -7,13 +7,14 @@ namespace API.Controllers
     using System.Security.Claims;
     using System.Text;
     using API.Data;
-    using API.Models;
+
 
 
     public class RegisterModel
     {
         public string Email {get; set; }
         public string Password {get; set;}
+        public string UserName { get; set; } //Agregado para Registro de usuario y mostralo en el sidebar
     }
 
     public class LoginModel {
@@ -21,7 +22,7 @@ namespace API.Controllers
         public string Password {get; set;}
     }
 
-    [Route("/[controller]")] // /auth
+    [Route("api/[controller]")] // /auth
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -40,12 +41,13 @@ namespace API.Controllers
         [HttpPost("register")] // /auth/register
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+            var user = new IdentityUser { UserName = model.UserName, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
 
-            if (result.Succeeded){
+            if (result.Succeeded)
+            {
                 await _userManager.AddToRoleAsync(user, "User");
-                return Ok(new { message = "User registred seccessfully" });
+                return Ok(new { message = "User registered successfully" });
             }
 
             return BadRequest(result.Errors);
@@ -60,7 +62,7 @@ namespace API.Controllers
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 var roles = await _userManager.GetRolesAsync(user);
                 var token = GenerateJwtToken(user, roles);
-                return Ok (new { token });
+                return Ok (new { token, username = user.UserName }); //Guarda el user en username y lo devuelve en el iniciop de sesion.
             }
 
             return Unauthorized();
